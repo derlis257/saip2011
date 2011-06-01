@@ -30,21 +30,39 @@ class Fase(DeclarativeBase):
 
 	#{ Columns
 
-	idfase = Column(Integer, autoincrement=True, primary_key=True)
+	id_fase = Column(Integer, autoincrement=True, primary_key=True)
 
-	nombrefase = Column(Unicode(30), unique=True, nullable=False)
+	nombre_fase = Column(Unicode(30), unique=True, nullable=False)
+
+	tipo_fase = Column(Unicode(30), nullable=False)
 
 	estado = Column(Unicode(30), nullable=False)
+
+	linea_base =Column (Unicode(30), nullable=False)
 	
 	descripcion = Column(Text)
 	
 	#{ Special methods
 
 	def __repr__(self):
-		return '<Fase: Nombre=%s>' % self.nombrefase
+		return '<Fase: Nombre=%s>' % self.nombre_fase
 	
 	def __unicode__(self):
-		return self.nombrefase
+		return self.nombre_fase
+       
+        @classmethod
+        def get_fase(self):
+		"""
+		Obtiene la lista de todos los usuarios
+		registrados en el sistema
+		"""
+		#Session = sessionmaker()
+		#session = Session() 
+		"""fases = session.query(cls).all()"""
+		fases = DBSession.query(Fase).all()
+		    
+		return fases
+
 
 	#}
 
